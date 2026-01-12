@@ -67,11 +67,26 @@
             background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
             color: white;
             height: 100vh;
+            width: 64px;
+            transition: all 0.3s ease;
+            overflow-y: auto;
+            position: fixed;
+            left: 0;
+            top: 0;
+            z-index: 40;
+        }
+        
+        @media (min-width: 1201px) {
+            .sidebar {
+                width: 256px;
+            }
         }
         
         .sidebar-item {
             transition: all 0.2s ease;
             border-radius: 10px;
+            white-space: nowrap;
+            overflow: hidden;
         }
         
         .sidebar-item:hover {
@@ -207,42 +222,367 @@
 
         .mobile-menu-toggle {
             display: none;
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 50;
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--primary);
+            color: white;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: none;
+            cursor: pointer;
         }
 
         /* ========== RESPONSIVE DESIGN ========== */
-        @media (max-width: 768px) {
-            /* Mobile styles here - too long to include fully */
+        /* Tablet and Mobile */
+        @media (max-width: 1200px) {
+            .main-content {
+                margin-left: 0 !important;
+                padding: 5rem 1rem 1rem 1rem !important;
+            }
+            
             .sidebar {
-                width: 100%;
-                height: auto;
-                position: fixed;
-                bottom: 0;
-                top: auto;
-                left: 0;
-                z-index: 40;
-                transform: translateY(100%);
+                width: 250px;
+                transform: translateX(-100%);
                 transition: transform 0.3s ease;
+                top: 0;
+                height: 100vh;
+                z-index: 40;
+                position: fixed;
             }
             
             .sidebar.active {
-                transform: translateY(0);
+                transform: translateX(0);
             }
             
             .mobile-menu-toggle {
                 display: flex !important;
-                position: fixed;
-                bottom: 1rem;
-                right: 1rem;
-                z-index: 50;
-                width: 56px;
-                height: 56px;
-                border-radius: 50%;
-                background: var(--primary);
-                color: white;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+            
+            .modal-content {
+                margin: 10% 1rem !important;
+                width: calc(100% - 2rem) !important;
+                max-height: calc(100vh - 2rem) !important;
+                overflow-y: auto !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Navigation */
+            nav .px-6 {
+                padding-left: 1rem !important;
+                padding-right: 1rem !important;
+            }
+            
+            nav h1 {
+                font-size: 1rem !important;
+            }
+            
+            .mobile-menu-toggle {
+                top: 0.75rem !important;
+                left: 0.75rem !important;
+                width: 44px !important;
+                height: 44px !important;
+            }
+            
+            /* Stats Grid */
+            .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4 {
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 0.75rem !important;
+            }
+            
+            .stat-card {
+                padding: 1rem !important;
+            }
+            
+            .stat-card p.text-3xl {
+                font-size: 1.75rem !important;
+            }
+            
+            /* Charts */
+            .grid.grid-cols-1.lg\:grid-cols-2 {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .chart-container,
+            .stat-card.p-6 {
+                padding: 1rem !important;
+            }
+            
+            /* Tables */
+            .overflow-x-auto {
+                font-size: 0.875rem;
+            }
+            
+            table th, table td {
+                padding: 0.75rem 0.5rem !important;
+            }
+            
+            /* Forms and filters */
+            .grid.grid-cols-1.md\:grid-cols-4.gap-4,
+            .grid.grid-cols-2.gap-4 {
+                grid-template-columns: 1fr !important;
+                gap: 0.75rem !important;
+            }
+            
+            .stat-card.p-6.mb-6 .flex.items-center.space-x-4 {
+                flex-direction: column !important;
+                gap: 0.75rem !important;
+            }
+            
+            .stat-card.p-6.mb-6 .flex.items-center.space-x-4 > * {
+                width: 100% !important;
+            }
+            
+            /* Employee table actions */
+            .flex.space-x-2 {
+                flex-wrap: wrap;
+                gap: 0.25rem;
+            }
+            
+            /* Login page */
+            #adminLoginPage .max-w-md {
+                max-width: 100% !important;
+                padding: 1rem !important;
+            }
+            
+            .glass-card.rounded-2xl.p-8 {
+                padding: 1.5rem !important;
+            }
+            
+            /* Modal content */
+            .modal-content {
+                margin: 5% 0.5rem !important;
+                border-radius: 12px !important;
+            }
+            
+            .modal-content .p-6 {
+                padding: 1rem !important;
+            }
+            
+            /* Hide some non-essential elements on mobile */
+            .hidden.md\:block {
+                display: none !important;
+            }
+            
+            /* Text sizes */
+            h1.text-3xl {
+                font-size: 1.75rem !important;
+            }
+            
+            h2.text-2xl {
+                font-size: 1.5rem !important;
+            }
+            
+            .text-lg {
+                font-size: 1rem !important;
+            }
+            
+            /* Buttons */
+            .btn-primary, button[class*="py-3"] {
+                padding-top: 0.75rem !important;
+                padding-bottom: 0.75rem !important;
+            }
+            
+            /* Toast */
+            .toast {
+                left: 0.5rem !important;
+                right: 0.5rem !important;
+                bottom: 0.5rem !important;
+                width: calc(100% - 1rem) !important;
+            }
+            
+            /* Sidebar text on mobile */
+            .sidebar span {
+                font-size: 0.875rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Extra small devices */
+            .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4 {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .stat-card {
+                margin-bottom: 0.5rem;
+            }
+            
+            /* Tables - make horizontal scroll more obvious */
+            .overflow-x-auto {
+                -webkit-overflow-scrolling: touch;
+                overflow-x: auto;
+                position: relative;
+            }
+            
+            table {
+                min-width: 600px; /* Force horizontal scroll on small screens */
+            }
+            
+            /* Navigation adjustments */
+            nav .flex.items-center.space-x-4 {
+                gap: 0.5rem;
+            }
+            
+            /* Employee name in dropdown */
+            #adminMenuBtn .text-left {
+                display: none;
+            }
+            
+            /* Stats icons */
+            .w-12.h-12 {
+                width: 2.5rem !important;
+                height: 2.5rem !important;
+            }
+            
+            /* Chart containers */
+            .h-64 {
+                height: 200px !important;
+            }
+            
+            /* Login page logo */
+            .w-16.h-16 {
+                width: 3rem !important;
+                height: 3rem !important;
+            }
+            
+            .text-3xl {
+                font-size: 1.5rem !important;
+            }
+            
+            /* Button text */
+            .btn-primary {
+                font-size: 0.875rem;
+            }
+            
+            /* Sidebar icons */
+            .sidebar-item i {
+                font-size: 1.125rem;
+            }
+        }
+
+        /* Tablet-specific adjustments */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .main-content {
+                margin-left: 0 !important;
+                padding: 4rem 1.5rem 1.5rem 1.5rem !important;
+            }
+            
+            .sidebar {
+                width: 220px;
+            }
+            
+            .mobile-menu-toggle {
+                display: flex !important;
+            }
+            
+            .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4 {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+            
+            .modal-content {
+                margin: 5% 2rem !important;
+                width: calc(100% - 4rem) !important;
+            }
+        }
+
+        /* Touch-friendly improvements for mobile */
+        @media (hover: none) and (pointer: coarse) {
+            /* Increase tap target sizes */
+            button, 
+            .sidebar-item,
+            .table-row,
+            input[type="button"],
+            input[type="submit"] {
+                min-height: 44px;
+                min-width: 44px;
+            }
+            
+            /* Prevent hover effects on touch devices */
+            .stat-card:hover {
+                transform: none;
+            }
+            
+            .sidebar-item:hover {
+                transform: none;
+                background: none;
+            }
+            
+            .sidebar-item.active:hover {
+                background: rgba(30, 64, 175, 0.2);
+            }
+            
+            /* Improve dropdown experience */
+            #adminMenuBtn {
+                padding: 0.5rem;
+            }
+            
+            /* Better scroll experience */
+            .sidebar {
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+
+        /* Landscape mode adjustments */
+        @media (max-height: 600px) and (orientation: landscape) {
+            .sidebar {
+                height: 100vh;
+                overflow-y: auto;
+            }
+            
+            .modal-content {
+                max-height: 90vh;
+                margin: 1% auto !important;
+            }
+            
+            .main-content {
+                padding-top: 4rem !important;
+            }
+            
+            nav {
+                height: 3.5rem;
+            }
+            
+            .h-16 {
+                height: 3.5rem;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            .sidebar,
+            .mobile-menu-toggle,
+            nav,
+            .modal,
+            .toast,
+            button {
+                display: none !important;
+            }
+            
+            .main-content {
+                margin: 0 !important;
+                padding: 0 !important;
+                width: 100% !important;
+            }
+            
+            .tab-content {
+                display: block !important;
+            }
+            
+            .stat-card {
+                box-shadow: none !important;
+                border: 1px solid #ddd !important;
+                break-inside: avoid;
+            }
+            
+            table {
+                width: 100%;
+                font-size: 12px;
             }
         }
     </style>
@@ -336,45 +676,53 @@
         </button>
 
         <!-- Sidebar -->
-        <div class="sidebar fixed left-0 top-16 h-[calc(100vh-4rem)] w-64 overflow-y-auto">
+        <div class="sidebar fixed left-0 top-0 h-screen overflow-y-auto">
             <div class="p-4">
-                <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Control Panel</h2>
+                <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 hidden lg:block">Control Panel</h2>
                 <nav class="space-y-1">
                     <button onclick="switchTab('adminDashboard')" class="w-full flex items-center space-x-3 px-4 py-3 sidebar-item text-left" data-tab="adminDashboard">
                         <i class="fas fa-chart-pie w-5"></i>
-                        <span>Dashboard</span>
+                        <span class="hidden lg:inline">Dashboard</span>
                     </button>
                     <button onclick="switchTab('employees')" class="w-full flex items-center space-x-3 px-4 py-3 sidebar-item text-left" data-tab="employees">
                         <i class="fas fa-users w-5"></i>
-                        <span>Employees</span>
+                        <span class="hidden lg:inline">Employees</span>
                     </button>
                     <button onclick="switchTab('records')" class="w-full flex items-center space-x-3 px-4 py-3 sidebar-item text-left" data-tab="records">
                         <i class="fas fa-history w-5"></i>
-                        <span>All Records</span>
+                        <span class="hidden lg:inline">All Records</span>
                     </button>
                     <button onclick="switchTab('analytics')" class="w-full flex items-center space-x-3 px-4 py-3 sidebar-item text-left" data-tab="analytics">
                         <i class="fas fa-chart-bar w-5"></i>
-                        <span>Analytics</span>
+                        <span class="hidden lg:inline">Analytics</span>
                     </button>
                 </nav>
             </div>
             
             <div class="p-4 mt-6">
-                <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Quick Actions</h2>
+                <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 hidden lg:block">Quick Actions</h2>
                 <div class="space-y-2">
                     <button onclick="showAddEmployeeModal()" class="w-full btn-primary py-2 rounded-lg text-sm font-medium">
-                        <i class="fas fa-user-plus mr-2"></i>Add Employee
+                        <i class="fas fa-user-plus mr-2"></i>
+                        <span class="hidden lg:inline">Add Employee</span>
                     </button>
                     <button onclick="exportAllData()" class="w-full bg-white text-gray-700 border border-gray-300 py-2 rounded-lg text-sm font-medium hover:bg-gray-50">
-                        <i class="fas fa-file-export mr-2"></i>Export All Data
+                        <i class="fas fa-file-export mr-2"></i>
+                        <span class="hidden lg:inline">Export All Data</span>
                     </button>
                 </div>
             </div>
             
             <div class="p-4 mt-6 border-t border-gray-700">
                 <div class="text-xs text-gray-400 space-y-1">
-                    <p><i class="fas fa-users mr-2"></i>Employees: <span id="totalEmployeesCount">0</span></p>
-                    <p><i class="fas fa-history mr-2"></i>Records: <span id="totalRecordsCount">0</span></p>
+                    <p><i class="fas fa-users mr-2"></i>
+                        <span class="hidden lg:inline">Employees: </span>
+                        <span id="totalEmployeesCount">0</span>
+                    </p>
+                    <p><i class="fas fa-history mr-2"></i>
+                        <span class="hidden lg:inline">Records: </span>
+                        <span id="totalRecordsCount">0</span>
+                    </p>
                 </div>
             </div>
         </div>
@@ -489,39 +837,41 @@
             
             <!-- Employees Tab -->
             <div id="employees" class="tab-content hidden">
-                <div class="mb-8 flex justify-between items-center">
+                <div class="mb-8 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div>
                         <h1 class="text-3xl font-bold text-gray-900">Team Management</h1>
                         <p class="text-gray-600">Manage employees and departments</p>
                     </div>
-                    <button onclick="showAddEmployeeModal()" class="btn-primary px-6 py-3 rounded-xl font-medium">
+                    <button onclick="showAddEmployeeModal()" class="btn-primary px-6 py-3 rounded-xl font-medium w-full sm:w-auto">
                         <i class="fas fa-user-plus mr-2"></i>Add Employee
                     </button>
                 </div>
                 
                 <!-- Search Bar -->
                 <div class="stat-card p-6 mb-6">
-                    <div class="flex items-center space-x-4">
-                        <div class="flex-1">
+                    <div class="flex flex-col sm:flex-row items-center space-y-3 sm:space-y-0 sm:space-x-4">
+                        <div class="flex-1 w-full">
                             <div class="relative">
                                 <i class="fas fa-search absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                                 <input type="text" id="employeeSearch" placeholder="Search employees by name, email, or department..." 
                                        class="w-full pl-10 pr-4 py-3 input-field">
                             </div>
                         </div>
-                        <button onclick="filterEmployees()" class="btn-primary px-6 py-3 rounded-lg">
-                            Search
-                        </button>
-                        <button onclick="resetEmployeeSearch()" class="border border-gray-300 px-6 py-3 rounded-lg hover:bg-gray-50">
-                            Reset
-                        </button>
+                        <div class="flex space-x-2 w-full sm:w-auto">
+                            <button onclick="filterEmployees()" class="btn-primary px-6 py-3 rounded-lg flex-1 sm:flex-none">
+                                Search
+                            </button>
+                            <button onclick="resetEmployeeSearch()" class="border border-gray-300 px-6 py-3 rounded-lg hover:bg-gray-50 flex-1 sm:flex-none">
+                                Reset
+                            </button>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- Employees Table -->
                 <div class="stat-card overflow-hidden">
                     <div class="p-6 border-b border-gray-100">
-                        <div class="flex justify-between items-center">
+                        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
                             <h3 class="text-lg font-semibold">All Employees</h3>
                             <span class="text-sm text-gray-500" id="employeeCount">0 employees</span>
                         </div>
@@ -563,7 +913,7 @@
                 
                 <!-- Filters -->
                 <div class="stat-card p-6 mb-6">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Date Range</label>
                             <select id="dateRangeFilter" class="w-full px-3 py-3 select-field">
@@ -587,7 +937,7 @@
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700 mb-2">Actions</label>
-                            <div class="flex space-x-2">
+                            <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                                 <button onclick="filterRecords()" class="flex-1 btn-primary py-3 rounded-lg">Filter</button>
                                 <button onclick="resetFilters()" class="flex-1 border border-gray-300 py-3 rounded-lg hover:bg-gray-50">Reset</button>
                             </div>
@@ -597,7 +947,7 @@
                 
                 <!-- Records Table -->
                 <div class="stat-card overflow-hidden">
-                    <div class="p-6 border-b border-gray-100 flex justify-between items-center">
+                    <div class="p-6 border-b border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
                         <h3 class="text-lg font-semibold">Time Records</h3>
                         <div class="flex items-center space-x-3">
                             <span class="text-sm text-gray-500" id="recordsCount">0 records</span>
@@ -665,7 +1015,7 @@
                 </div>
                 <div class="p-6">
                     <div class="space-y-6">
-                        <div class="grid grid-cols-2 gap-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div>
                                 <label class="block text-sm font-medium text-gray-700 mb-2">First Name</label>
                                 <input type="text" id="firstName" class="w-full px-3 py-3 input-field">
@@ -700,9 +1050,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="p-6 border-t border-gray-100 flex justify-end space-x-3">
-                    <button onclick="closeModal('addEmployeeModal')" class="px-5 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Cancel</button>
-                    <button onclick="saveEmployee()" class="btn-primary px-5 py-2 rounded-lg">Save Employee</button>
+                <div class="p-6 border-t border-gray-100 flex flex-col sm:flex-row justify-end space-y-2 sm:space-y-0 sm:space-x-3">
+                    <button onclick="closeModal('addEmployeeModal')" class="px-5 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 w-full sm:w-auto">Cancel</button>
+                    <button onclick="saveEmployee()" class="btn-primary px-5 py-2 rounded-lg w-full sm:w-auto">Save Employee</button>
                 </div>
             </div>
         </div>
@@ -765,6 +1115,9 @@
             
             // Set up event listeners
             setupEventListeners();
+            
+            // Initialize responsive sidebar on load
+            initResponsiveSidebar();
         });
 
         function setupEventListeners() {
@@ -781,6 +1134,16 @@
                     document.getElementById('adminDropdown').classList.add('hidden');
                 }
             });
+        }
+
+        function initResponsiveSidebar() {
+            // On mobile, show sidebar text when sidebar is active
+            const sidebar = document.querySelector('.sidebar');
+            if (window.innerWidth <= 1200) {
+                sidebar.querySelectorAll('.hidden.lg\\:inline').forEach(el => {
+                    el.classList.add('lg:hidden');
+                });
+            }
         }
 
         // ==================== AUTHENTICATION ====================
@@ -901,6 +1264,11 @@
                 updateDepartmentOverview();
             } else if (tabName === 'analytics') {
                 updateAnalytics();
+            }
+            
+            // Close mobile menu after switching tabs on mobile
+            if (window.innerWidth <= 1200) {
+                toggleMobileMenu();
             }
         }
 
@@ -1845,10 +2213,12 @@
 
         function showModal(modalId) {
             document.getElementById(modalId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal(modalId) {
             document.getElementById(modalId).style.display = 'none';
+            document.body.style.overflow = 'auto';
         }
 
         // Close modal when clicking outside
@@ -1857,6 +2227,7 @@
             modals.forEach(modal => {
                 if (event.target === modal) {
                     modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
                 }
             });
         });
@@ -1864,30 +2235,112 @@
         // Mobile menu functions
         function toggleMobileMenu() {
             const sidebar = document.querySelector('.sidebar');
+            const toggleBtn = document.querySelector('.mobile-menu-toggle i');
+            
             sidebar.classList.toggle('active');
+            
+            if (sidebar.classList.contains('active')) {
+                toggleBtn.classList.remove('fa-bars');
+                toggleBtn.classList.add('fa-times');
+                // Show sidebar text on mobile when active
+                sidebar.querySelectorAll('.hidden.lg\\:inline').forEach(el => {
+                    el.classList.remove('lg:hidden');
+                });
+            } else {
+                toggleBtn.classList.remove('fa-times');
+                toggleBtn.classList.add('fa-bars');
+                // Hide sidebar text on mobile when inactive
+                if (window.innerWidth <= 1200) {
+                    sidebar.querySelectorAll('.hidden.lg\\:inline').forEach(el => {
+                        el.classList.add('lg:hidden');
+                    });
+                }
+            }
         }
 
         document.addEventListener('click', function(e) {
             const sidebar = document.querySelector('.sidebar');
             const mobileToggle = document.querySelector('.mobile-menu-toggle');
             
-            if (sidebar && sidebar.classList.contains('active') && 
+            if (window.innerWidth <= 1200 && 
+                sidebar && sidebar.classList.contains('active') && 
                 !sidebar.contains(e.target) && 
                 !mobileToggle.contains(e.target)) {
                 sidebar.classList.remove('active');
+                mobileToggle.querySelector('i').classList.remove('fa-times');
+                mobileToggle.querySelector('i').classList.add('fa-bars');
+                // Hide sidebar text
+                sidebar.querySelectorAll('.hidden.lg\\:inline').forEach(el => {
+                    el.classList.add('lg:hidden');
+                });
             }
         });
 
         document.querySelectorAll('.sidebar-item').forEach(item => {
             item.addEventListener('click', function() {
-                if (window.innerWidth <= 768) {
+                if (window.innerWidth <= 1200) {
                     const sidebar = document.querySelector('.sidebar');
+                    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+                    
                     sidebar.classList.remove('active');
+                    if (mobileToggle) {
+                        mobileToggle.querySelector('i').classList.remove('fa-times');
+                        mobileToggle.querySelector('i').classList.add('fa-bars');
+                        // Hide sidebar text
+                        sidebar.querySelectorAll('.hidden.lg\\:inline').forEach(el => {
+                            el.classList.add('lg:hidden');
+                        });
+                    }
                 }
             });
         });
 
-        console.log('Admin Portal loaded successfully with LocalStorage');
+        // Handle window resize
+        let resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                if (window.innerWidth > 1200) {
+                    const sidebar = document.querySelector('.sidebar');
+                    const mobileToggle = document.querySelector('.mobile-menu-toggle');
+                    
+                    if (sidebar) {
+                        sidebar.classList.remove('active');
+                        // Show sidebar text on desktop
+                        sidebar.querySelectorAll('.hidden.lg\\:inline').forEach(el => {
+                            el.classList.remove('lg:hidden');
+                        });
+                    }
+                    if (mobileToggle) {
+                        mobileToggle.querySelector('i').classList.remove('fa-times');
+                        mobileToggle.querySelector('i').classList.add('fa-bars');
+                    }
+                } else {
+                    // On mobile, hide sidebar text by default
+                    const sidebar = document.querySelector('.sidebar');
+                    if (sidebar && !sidebar.classList.contains('active')) {
+                        sidebar.querySelectorAll('.hidden.lg\\:inline').forEach(el => {
+                            el.classList.add('lg:hidden');
+                        });
+                    }
+                }
+                
+                // Update charts on resize
+                if (dailyTrendChart) dailyTrendChart.resize();
+                if (departmentChart) departmentChart.resize();
+                if (productivityChart) productivityChart.resize();
+                if (projectDistributionChart) projectDistributionChart.resize();
+            }, 250);
+        });
+
+        // Prevent body scroll when modal is open on mobile
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('touchmove', function(e) {
+                e.preventDefault();
+            }, { passive: false });
+        });
+
+        console.log('Admin Portal loaded successfully with responsive design');
     </script>
 </body>
 </html>
