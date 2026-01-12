@@ -66,25 +66,19 @@
         .sidebar {
             background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
             color: white;
-            height: 100vh;
-            width: 64px;
-            transition: all 0.3s ease;
-            overflow-y: auto;
+            height: calc(100vh - 4rem);
+            width: 256px;
             position: fixed;
             left: 0;
-            top: 0;
+            top: 4rem;
             z-index: 40;
-        }
-        
-        .sidebar.expanded {
-            width: 256px;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
         }
         
         .sidebar-item {
             transition: all 0.2s ease;
             border-radius: 10px;
-            white-space: nowrap;
-            overflow: hidden;
         }
         
         .sidebar-item:hover {
@@ -220,70 +214,60 @@
 
         .mobile-menu-toggle {
             display: none;
-            position: fixed;
-            top: 1rem;
-            left: 1rem;
-            z-index: 50;
-            width: 48px;
-            height: 48px;
-            border-radius: 12px;
-            background: var(--primary);
-            color: white;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            border: none;
-            cursor: pointer;
+        }
+
+        /* Main content area */
+        .main-content {
+            margin-left: 256px;
+            padding-top: 4rem;
+            min-height: 100vh;
+            background: #f8fafc;
         }
 
         /* ========== RESPONSIVE DESIGN ========== */
-        /* Tablet and Mobile */
-        @media (max-width: 1200px) {
-            .main-content {
-                margin-left: 0 !important;
-                padding: 5rem 1rem 1rem 1rem !important;
-            }
-            
+        /* Tablet */
+        @media (max-width: 1024px) {
             .sidebar {
-                width: 0;
                 transform: translateX(-100%);
-                transition: transform 0.3s ease;
+                width: 280px;
                 top: 0;
                 height: 100vh;
-                z-index: 40;
-                position: fixed;
+                padding-top: 4rem;
             }
             
             .sidebar.active {
-                width: 256px;
                 transform: translateX(0);
             }
             
+            .main-content {
+                margin-left: 0;
+            }
+            
             .mobile-menu-toggle {
-                display: flex !important;
+                display: flex;
+                position: fixed;
+                top: 1rem;
+                left: 1rem;
+                z-index: 50;
+                width: 48px;
+                height: 48px;
+                border-radius: 12px;
+                background: var(--primary);
+                color: white;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+                border: none;
+                cursor: pointer;
             }
             
             .modal-content {
-                margin: 10% 1rem !important;
-                width: calc(100% - 2rem) !important;
-                max-height: calc(100vh - 2rem) !important;
-                overflow-y: auto !important;
-            }
-            
-            /* Adjust navigation text */
-            nav h1.text-lg {
-                font-size: 1rem !important;
-                max-width: 150px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                white-space: nowrap;
-            }
-            
-            .hidden.md\:block {
-                display: none !important;
+                margin: 10% 1rem;
+                width: calc(100% - 2rem);
             }
         }
 
+        /* Mobile */
         @media (max-width: 768px) {
             /* Navigation */
             nav .px-6 {
@@ -293,20 +277,19 @@
             
             nav h1 {
                 font-size: 1rem !important;
-                max-width: 120px;
             }
             
             .mobile-menu-toggle {
-                top: 0.75rem !important;
-                left: 0.75rem !important;
-                width: 44px !important;
-                height: 44px !important;
+                top: 0.75rem;
+                left: 0.75rem;
+                width: 44px;
+                height: 44px;
             }
             
             /* Stats Grid */
             .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4 {
                 grid-template-columns: repeat(2, 1fr) !important;
-                gap: 0.75rem !important;
+                gap: 0.75rem;
             }
             
             .stat-card {
@@ -340,16 +323,16 @@
             .grid.grid-cols-1.md\:grid-cols-4.gap-4,
             .grid.grid-cols-2.gap-4 {
                 grid-template-columns: 1fr !important;
-                gap: 0.75rem !important;
+                gap: 0.75rem;
             }
             
             .stat-card.p-6.mb-6 .flex.items-center.space-x-4 {
-                flex-direction: column !important;
-                gap: 0.75rem !important;
+                flex-direction: column;
+                gap: 0.75rem;
             }
             
             .stat-card.p-6.mb-6 .flex.items-center.space-x-4 > * {
-                width: 100% !important;
+                width: 100%;
             }
             
             /* Employee table actions */
@@ -361,7 +344,7 @@
             /* Login page */
             #adminLoginPage .max-w-md {
                 max-width: 100% !important;
-                padding: 1rem !important;
+                padding: 1rem;
             }
             
             .glass-card.rounded-2xl.p-8 {
@@ -370,8 +353,8 @@
             
             /* Modal content */
             .modal-content {
-                margin: 5% 0.5rem !important;
-                border-radius: 12px !important;
+                margin: 5% 0.5rem;
+                border-radius: 12px;
             }
             
             .modal-content .p-6 {
@@ -404,34 +387,15 @@
             
             /* Toast */
             .toast {
-                left: 0.5rem !important;
-                right: 0.5rem !important;
-                bottom: 0.5rem !important;
-                width: calc(100% - 1rem) !important;
+                left: 0.5rem;
+                right: 0.5rem;
+                bottom: 0.5rem;
+                width: calc(100% - 1rem);
             }
             
-            /* Sidebar text on mobile - Show when active */
-            .sidebar.active span {
-                display: inline !important;
-            }
-            
-            .sidebar span {
-                display: none;
-            }
-            
-            /* Fix admin name in navigation on mobile */
+            /* Fix admin name in navigation */
             #adminMenuBtn .text-left {
                 display: none;
-            }
-            
-            /* Dashboard title adjustment */
-            .mb-8 h1.text-3xl {
-                font-size: 1.5rem !important;
-                line-height: 1.2;
-            }
-            
-            .mb-8 p.text-gray-600 {
-                font-size: 0.875rem;
             }
         }
 
@@ -449,11 +413,10 @@
             .overflow-x-auto {
                 -webkit-overflow-scrolling: touch;
                 overflow-x: auto;
-                position: relative;
             }
             
             table {
-                min-width: 600px; /* Force horizontal scroll on small screens */
+                min-width: 600px;
             }
             
             /* Navigation adjustments */
@@ -487,104 +450,19 @@
                 font-size: 0.875rem;
             }
             
-            /* Sidebar icons */
-            .sidebar-item i {
-                font-size: 1.125rem;
-            }
-            
-            /* Fix dashboard header on very small screens */
-            .mb-8 h1.text-3xl {
-                font-size: 1.25rem !important;
-            }
-            
-            /* Adjust padding for better mobile experience */
+            /* Main content padding */
             .main-content {
-                padding: 4.5rem 0.75rem 0.75rem 0.75rem !important;
-            }
-            
-            /* Make mobile menu button more visible */
-            .mobile-menu-toggle {
-                top: 0.5rem !important;
-                left: 0.5rem !important;
-            }
-        }
-
-        /* Tablet-specific adjustments */
-        @media (min-width: 769px) and (max-width: 1024px) {
-            .main-content {
-                margin-left: 0 !important;
-                padding: 4rem 1.5rem 1.5rem 1.5rem !important;
-            }
-            
-            .sidebar {
-                width: 0;
-            }
-            
-            .sidebar.active {
-                width: 220px;
+                padding: 4rem 0.75rem 0.75rem 0.75rem;
             }
             
             .mobile-menu-toggle {
-                display: flex !important;
-            }
-            
-            .grid.grid-cols-1.md\:grid-cols-2.lg\:grid-cols-4 {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-            
-            .modal-content {
-                margin: 5% 2rem !important;
-                width: calc(100% - 4rem) !important;
-            }
-            
-            /* Adjust navigation text for tablet */
-            nav h1.text-lg {
-                font-size: 1.1rem !important;
-                max-width: 200px;
-            }
-        }
-
-        /* Desktop specific adjustments */
-        @media (min-width: 1201px) {
-            .sidebar {
-                width: 256px !important;
-            }
-            
-            .main-content {
-                margin-left: 256px !important;
-            }
-            
-            .mobile-menu-toggle {
-                display: none !important;
-            }
-            
-            /* Show all sidebar text on desktop */
-            .sidebar span {
-                display: inline !important;
-            }
-            
-            /* Fix dashboard spacing on desktop */
-            nav h1.text-lg {
-                font-size: 1.25rem !important;
-                max-width: none;
-            }
-        }
-
-        /* Large Desktop screens */
-        @media (min-width: 1440px) {
-            .main-content {
-                padding-left: 2rem !important;
-                padding-right: 2rem !important;
-            }
-            
-            nav h1.text-lg {
-                font-size: 1.5rem !important;
+                top: 0.5rem;
+                left: 0.5rem;
             }
         }
 
         /* Touch-friendly improvements for mobile */
         @media (hover: none) and (pointer: coarse) {
-            /* Increase tap target sizes */
             button, 
             .sidebar-item,
             .table-row,
@@ -594,26 +472,6 @@
                 min-width: 44px;
             }
             
-            /* Prevent hover effects on touch devices */
-            .stat-card:hover {
-                transform: none;
-            }
-            
-            .sidebar-item:hover {
-                transform: none;
-                background: none;
-            }
-            
-            .sidebar-item.active:hover {
-                background: rgba(30, 64, 175, 0.2);
-            }
-            
-            /* Improve dropdown experience */
-            #adminMenuBtn {
-                padding: 0.5rem;
-            }
-            
-            /* Better scroll experience */
             .sidebar {
                 -webkit-overflow-scrolling: touch;
             }
@@ -623,16 +481,11 @@
         @media (max-height: 600px) and (orientation: landscape) {
             .sidebar {
                 height: 100vh;
-                overflow-y: auto;
             }
             
             .modal-content {
                 max-height: 90vh;
-                margin: 1% auto !important;
-            }
-            
-            .main-content {
-                padding-top: 4rem !important;
+                margin: 1% auto;
             }
             
             nav {
@@ -641,11 +494,6 @@
             
             .h-16 {
                 height: 3.5rem;
-            }
-            
-            /* Show more content in landscape */
-            .h-64 {
-                height: 150px !important;
             }
         }
 
@@ -673,7 +521,6 @@
             .stat-card {
                 box-shadow: none !important;
                 border: 1px solid #ddd !important;
-                break-inside: avoid;
             }
             
             table {
@@ -682,27 +529,9 @@
             }
         }
         
-        /* Ensure sidebar text is always visible when sidebar is expanded */
-        .sidebar:not(.active) .sidebar-text {
-            display: none !important;
-        }
-        
-        .sidebar.active .sidebar-text {
-            display: inline !important;
-        }
-        
-        /* Dashboard tab content visibility */
+        /* Ensure all content is visible */
         .tab-content {
             width: 100%;
-        }
-        
-        /* Fix for dashboard header on mobile */
-        .main-content > .tab-content {
-            display: block;
-        }
-        
-        #adminDashboard.tab-content {
-            display: block;
         }
     </style>
 </head>
@@ -768,7 +597,7 @@
                     <div class="relative">
                         <button id="adminMenuBtn" class="flex items-center space-x-2 px-4 py-2 rounded-xl hover:bg-gray-50 transition-colors">
                             <div class="avatar">A</div>
-                            <div class="text-left hidden sm:block">
+                            <div class="text-left">
                                 <p class="text-sm font-medium" id="adminName">Admin User</p>
                                 <p class="text-xs text-gray-500">Administrator</p>
                             </div>
@@ -795,61 +624,53 @@
         </button>
 
         <!-- Sidebar -->
-        <div class="sidebar fixed left-0 top-0 h-screen overflow-y-auto">
+        <div class="sidebar">
             <div class="p-4">
-                <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 sidebar-text">Control Panel</h2>
+                <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Control Panel</h2>
                 <nav class="space-y-1">
-                    <button onclick="switchTab('adminDashboard')" class="w-full flex items-center space-x-3 px-4 py-3 sidebar-item text-left" data-tab="adminDashboard">
+                    <button onclick="switchTab('dashboard')" class="w-full flex items-center space-x-3 px-4 py-3 sidebar-item text-left active" data-tab="dashboard">
                         <i class="fas fa-chart-pie w-5"></i>
-                        <span class="sidebar-text">Dashboard</span>
+                        <span>Dashboard</span>
                     </button>
                     <button onclick="switchTab('employees')" class="w-full flex items-center space-x-3 px-4 py-3 sidebar-item text-left" data-tab="employees">
                         <i class="fas fa-users w-5"></i>
-                        <span class="sidebar-text">Employees</span>
+                        <span>Employees</span>
                     </button>
                     <button onclick="switchTab('records')" class="w-full flex items-center space-x-3 px-4 py-3 sidebar-item text-left" data-tab="records">
                         <i class="fas fa-history w-5"></i>
-                        <span class="sidebar-text">All Records</span>
+                        <span>All Records</span>
                     </button>
                     <button onclick="switchTab('analytics')" class="w-full flex items-center space-x-3 px-4 py-3 sidebar-item text-left" data-tab="analytics">
                         <i class="fas fa-chart-bar w-5"></i>
-                        <span class="sidebar-text">Analytics</span>
+                        <span>Analytics</span>
                     </button>
                 </nav>
             </div>
             
             <div class="p-4 mt-6">
-                <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4 sidebar-text">Quick Actions</h2>
+                <h2 class="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-4">Quick Actions</h2>
                 <div class="space-y-2">
                     <button onclick="showAddEmployeeModal()" class="w-full btn-primary py-2 rounded-lg text-sm font-medium">
-                        <i class="fas fa-user-plus mr-2"></i>
-                        <span class="sidebar-text">Add Employee</span>
+                        <i class="fas fa-user-plus mr-2"></i>Add Employee
                     </button>
                     <button onclick="exportAllData()" class="w-full bg-white text-gray-700 border border-gray-300 py-2 rounded-lg text-sm font-medium hover:bg-gray-50">
-                        <i class="fas fa-file-export mr-2"></i>
-                        <span class="sidebar-text">Export All Data</span>
+                        <i class="fas fa-file-export mr-2"></i>Export All Data
                     </button>
                 </div>
             </div>
             
             <div class="p-4 mt-6 border-t border-gray-700">
                 <div class="text-xs text-gray-400 space-y-1">
-                    <p><i class="fas fa-users mr-2"></i>
-                        <span class="sidebar-text">Employees: </span>
-                        <span id="totalEmployeesCount">0</span>
-                    </p>
-                    <p><i class="fas fa-history mr-2"></i>
-                        <span class="sidebar-text">Records: </span>
-                        <span id="totalRecordsCount">0</span>
-                    </p>
+                    <p><i class="fas fa-users mr-2"></i>Employees: <span id="totalEmployeesCount">0</span></p>
+                    <p><i class="fas fa-history mr-2"></i>Records: <span id="totalRecordsCount">0</span></p>
                 </div>
             </div>
         </div>
 
         <!-- Main Content -->
-        <div class="main-content ml-64 pt-16 p-6 bg-gray-50 min-h-screen">
-            <!-- Admin Dashboard Tab -->
-            <div id="adminDashboardContent" class="tab-content">
+        <div class="main-content p-6">
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content">
                 <div class="mb-8">
                     <h1 class="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
                     <p class="text-gray-600">Team productivity and time tracking overview</p>
@@ -1193,10 +1014,6 @@
         // ==================== INITIALIZATION ====================
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize default admin if none exists
-            let employees = JSON.parse(localStorage.getItem('ce_users')) || [];
-            let timeRecords = JSON.parse(localStorage.getItem('ce_time_records')) || [];
-            
-            // Check if admin account exists, if not create one
             if (employees.length === 0 || !employees.some(u => u.role === 'admin')) {
                 const adminUser = {
                     id: 'admin_001',
@@ -1234,9 +1051,6 @@
             
             // Set up event listeners
             setupEventListeners();
-            
-            // Initialize responsive sidebar on load
-            initResponsiveSidebar();
         });
 
         function setupEventListeners() {
@@ -1253,16 +1067,6 @@
                     document.getElementById('adminDropdown').classList.add('hidden');
                 }
             });
-        }
-
-        function initResponsiveSidebar() {
-            // On mobile, show sidebar text when sidebar is active
-            const sidebar = document.querySelector('.sidebar');
-            if (window.innerWidth <= 1200) {
-                sidebar.classList.remove('expanded');
-            } else {
-                sidebar.classList.add('expanded');
-            }
         }
 
         // ==================== AUTHENTICATION ====================
@@ -1325,10 +1129,11 @@
             updateCounts();
             initializeCharts();
             
-            switchTab('adminDashboard');
-            
-            // Initialize responsive view
-            handleResponsiveLayout();
+            // Make sure dashboard is visible
+            document.getElementById('dashboard').classList.remove('hidden');
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                if (tab.id !== 'dashboard') tab.classList.add('hidden');
+            });
         }
 
         function updateAdminInfo() {
@@ -1382,7 +1187,7 @@
             }
             
             // Load specific content for each tab
-            if (tabName === 'adminDashboardContent') {
+            if (tabName === 'dashboard') {
                 updateDashboardStats();
             } else if (tabName === 'records') {
                 loadAllRecords();
@@ -1394,22 +1199,8 @@
             }
             
             // Close mobile menu after switching tabs on mobile
-            if (window.innerWidth <= 1200) {
+            if (window.innerWidth <= 1024) {
                 toggleMobileMenu();
-            }
-        }
-
-        // ==================== RESPONSIVE LAYOUT HANDLING ====================
-        function handleResponsiveLayout() {
-            if (window.innerWidth <= 1200) {
-                const sidebar = document.querySelector('.sidebar');
-                sidebar.classList.remove('expanded');
-                
-                // Ensure dashboard is visible
-                document.getElementById('adminDashboardContent').classList.remove('hidden');
-            } else {
-                const sidebar = document.querySelector('.sidebar');
-                sidebar.classList.add('expanded');
             }
         }
 
@@ -2383,11 +2174,9 @@
             if (sidebar.classList.contains('active')) {
                 toggleBtn.classList.remove('fa-bars');
                 toggleBtn.classList.add('fa-times');
-                sidebar.classList.add('expanded');
             } else {
                 toggleBtn.classList.remove('fa-times');
                 toggleBtn.classList.add('fa-bars');
-                sidebar.classList.remove('expanded');
             }
         }
 
@@ -2395,12 +2184,11 @@
             const sidebar = document.querySelector('.sidebar');
             const mobileToggle = document.querySelector('.mobile-menu-toggle');
             
-            if (window.innerWidth <= 1200 && 
+            if (window.innerWidth <= 1024 && 
                 sidebar && sidebar.classList.contains('active') && 
                 !sidebar.contains(e.target) && 
                 !mobileToggle.contains(e.target)) {
                 sidebar.classList.remove('active');
-                sidebar.classList.remove('expanded');
                 mobileToggle.querySelector('i').classList.remove('fa-times');
                 mobileToggle.querySelector('i').classList.add('fa-bars');
             }
@@ -2408,12 +2196,11 @@
 
         document.querySelectorAll('.sidebar-item').forEach(item => {
             item.addEventListener('click', function() {
-                if (window.innerWidth <= 1200) {
+                if (window.innerWidth <= 1024) {
                     const sidebar = document.querySelector('.sidebar');
                     const mobileToggle = document.querySelector('.mobile-menu-toggle');
                     
                     sidebar.classList.remove('active');
-                    sidebar.classList.remove('expanded');
                     if (mobileToggle) {
                         mobileToggle.querySelector('i').classList.remove('fa-times');
                         mobileToggle.querySelector('i').classList.add('fa-bars');
@@ -2423,49 +2210,28 @@
         });
 
         // Handle window resize
-        let resizeTimer;
         window.addEventListener('resize', function() {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(function() {
-                if (window.innerWidth > 1200) {
-                    const sidebar = document.querySelector('.sidebar');
-                    const mobileToggle = document.querySelector('.mobile-menu-toggle');
-                    
-                    if (sidebar) {
-                        sidebar.classList.remove('active');
-                        sidebar.classList.add('expanded');
-                    }
-                    if (mobileToggle) {
-                        mobileToggle.querySelector('i').classList.remove('fa-times');
-                        mobileToggle.querySelector('i').classList.add('fa-bars');
-                    }
-                } else {
-                    // On mobile, ensure sidebar is collapsed by default
-                    const sidebar = document.querySelector('.sidebar');
-                    if (sidebar && !sidebar.classList.contains('active')) {
-                        sidebar.classList.remove('expanded');
-                    }
+            if (window.innerWidth > 1024) {
+                const sidebar = document.querySelector('.sidebar');
+                const mobileToggle = document.querySelector('.mobile-menu-toggle');
+                
+                if (sidebar) {
+                    sidebar.classList.remove('active');
                 }
-                
-                // Update charts on resize
-                if (dailyTrendChart) dailyTrendChart.resize();
-                if (departmentChart) departmentChart.resize();
-                if (productivityChart) productivityChart.resize();
-                if (projectDistributionChart) projectDistributionChart.resize();
-                
-                // Ensure dashboard is visible
-                handleResponsiveLayout();
-            }, 250);
+                if (mobileToggle) {
+                    mobileToggle.querySelector('i').classList.remove('fa-times');
+                    mobileToggle.querySelector('i').classList.add('fa-bars');
+                }
+            }
+            
+            // Update charts on resize
+            if (dailyTrendChart) dailyTrendChart.resize();
+            if (departmentChart) departmentChart.resize();
+            if (productivityChart) productivityChart.resize();
+            if (projectDistributionChart) projectDistributionChart.resize();
         });
 
-        // Prevent body scroll when modal is open on mobile
-        document.querySelectorAll('.modal').forEach(modal => {
-            modal.addEventListener('touchmove', function(e) {
-                e.preventDefault();
-            }, { passive: false });
-        });
-
-        console.log('Admin Portal loaded successfully with fixed responsive design');
+        console.log('Admin Portal loaded successfully');
     </script>
 </body>
 </html>
